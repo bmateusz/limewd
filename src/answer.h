@@ -1,9 +1,7 @@
 #ifndef ANSWER_H
 #define ANSWER_H
 
-#include <microhttpd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "mhd.h"
 #include <string.h>
 
 int answer_to_connection(void *cls,

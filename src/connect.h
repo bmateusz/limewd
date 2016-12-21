@@ -7,9 +7,7 @@
 #include <winsock2.h>
 #endif
 
-#include <microhttpd.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "mhd.h"
 #include <string.h>
 
 void get_ip_str(const struct sockaddr *sa,
