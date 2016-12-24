@@ -2,6 +2,9 @@
 #define ANSWER_H
 
 #include "mhd.h"
+#include "common.h"
+#include "session.h"
+#include "static.h"
 #include <string.h>
 
 int answer_to_connection(void *cls,

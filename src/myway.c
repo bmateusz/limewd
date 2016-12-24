@@ -7,6 +7,8 @@ int main(int argc, char *argv[])
 
   srand(time(&t));
 
+  printf("start %s\n", argv[0]);
+
   daemon = MHD_start_daemon(MHD_USE_DEBUG | MHD_USE_SELECT_INTERNALLY,
                             PORT,
                             &on_client_connect, NULL,

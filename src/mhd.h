@@ -8,9 +8,8 @@
 #else
 #include <winsock2.h>
 #endif
-#include <string.h>
+#include <microhttpd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <microhttpd.h>
 
 #endif

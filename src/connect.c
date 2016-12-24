@@ -35,5 +35,5 @@ void request_completed(void *cls,
                        void **con_cls,
                        enum MHD_RequestTerminationCode toe)
 {
-  printf("request completed\n");
+  printf("request completed %d\n", toe);
 }

@@ -1,9 +1,14 @@
 #ifndef STATIC_H
 #define STATIC_H
 
-#include "mhd.h"
+#include "common.h"
+#include "mime.h"
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <string.h>
 
-struct MHD_Response *answer_static(char *url,
-                                   void **ptr);
+int answer_static(struct MHD_Connection *connection,
+                  const char *url,
+                  void **ptr);
 
 #endif
