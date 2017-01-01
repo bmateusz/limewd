@@ -9,13 +9,14 @@ int answer_static(struct MHD_Connection *connection,
   int fd;
   struct stat sbuf;
 
-  char *filename = "static/ein.png";
+  const char *filename = url + 1;
   const char *mime = get_mime(filename);
   char etag[32];
   const char *if_none_match;
 
   if ((fd = open(filename, O_RDONLY)) > 0
-      && fstat(fd, &sbuf) == 0)
+      && fstat(fd, &sbuf) == 0
+      && strstr(filename, "..") == NULL)
   {
     printf("Answer %s [%s]\n", filename, mime);
 
@@ -35,8 +36,9 @@ int answer_static(struct MHD_Connection *connection,
 
       MHD_add_response_header(response, MHD_HTTP_HEADER_CONTENT_TYPE, mime);
       MHD_add_response_header(response, MHD_HTTP_HEADER_ETAG, etag);
-      MHD_add_response_header(response, MHD_HTTP_HEADER_CACHE_CONTROL, "max-age=5"); //86400
+      MHD_add_response_header(response, MHD_HTTP_HEADER_CACHE_CONTROL, "max-age=5"); /* 86400 */
       ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
+      MHD_destroy_response(response);
     }
   }
   else

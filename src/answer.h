@@ -5,6 +5,8 @@
 #include "common.h"
 #include "session.h"
 #include "static.h"
+#include "request.h"
+#include "auth.h"
 #include <string.h>
 
 int answer_to_connection(void *cls,

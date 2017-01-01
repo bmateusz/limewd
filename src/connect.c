@@ -32,8 +32,12 @@ int on_client_connect(void *cls,
 
 void request_completed(void *cls,
                        struct MHD_Connection *connection,
-                       void **con_cls,
+                       void **ptr,
                        enum MHD_RequestTerminationCode toe)
 {
+  struct Request *request = *ptr;
+
   printf("request completed %d\n", toe);
+
+  destruct_request(request);
 }

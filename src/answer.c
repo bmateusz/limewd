@@ -15,63 +15,89 @@ int answer_to_connection(void *cls,
                          const char *upload_data,
                          size_t *upload_data_size,
                          void **ptr)
-{
-  char *page;
-  struct MHD_Response *response;
-  int ret = MHD_NO;
-
-  if (strcmp(method, "GET") == 0)
   {
-    if (*ptr == NULL)
+    char *page;
+    struct MHD_Response *response;
+    struct Request *request = *ptr;
+    int ret = MHD_NO;
+
+    if (request == NULL)
     {
-      *ptr = connection;
+      request = malloc(sizeof(struct Request));
+      *ptr = request;
 
       MHD_get_connection_values(connection, MHD_HEADER_KIND, print_out_key, NULL);
 
-      return MHD_YES;
-    }
-    else
-    {
-      if (strncmp(url, "/s", 2) == 0)
+      if (strcmp(method, MHD_HTTP_METHOD_POST) == 0)
       {
-        ret = answer_static(connection, url, ptr);
-      }
-      else if (strcmp(url, "/") == 0)
-      {
-        char *created = NULL;
-        const char *cookie = check_or_create_session(connection, &created);
-
-        page = (char*)malloc(1024);
-        snprintf(page,
-                 1024,
-                 "<html><body>"
-                 "<p>URL: %s</p>"
-                 "<p>Method: %s</p>"
-                 "<p>Version: %s</p>"
-                 "<p>Upload data size %lu</p>"
-                 "<p>Cookie: %s</p>"
-                 "</body></html>",
-                 url,
-                 method,
-                 version,
-                 *upload_data_size,
-                 cookie);
-        
-        response = MHD_create_response_from_buffer(strlen(page),
-                                                   (void*)page,
-                                                   MHD_RESPMEM_MUST_FREE);
-
-        if (created != NULL) set_session(created, response);
-
-        ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
-        MHD_destroy_response(response);
-        printf("respond to %s\n", url);
+        request->pp = MHD_create_post_processor(connection, 256, &auth_iterator, request);
       }
       else
       {
-        ret = answer_404(connection, url);
+        request->pp = NULL;
       }
-      *ptr = NULL;
+
+    return MHD_YES;
+  }
+  else if (strcmp(method, MHD_HTTP_METHOD_GET) == 0)
+  {
+    printf("Answer to url <%s>\n", url);
+
+    if (strncmp(url, "/static/", 8) == 0)
+    {
+      ret = answer_static(connection, url, ptr);
+    }
+    else if (strcmp(url, "/") == 0)
+    {
+      char *created = NULL;
+      const char *cookie = check_or_create_session(connection, &created);
+
+      page = (char*)malloc(1024);
+      snprintf(page,
+               1024,
+               "<html><body>"
+               "<p>URL: %s</p>"
+               "<p>Method: %s</p>"
+               "<p>Version: %s</p>"
+               "<p>Upload data size %lu</p>"
+               "<p>Cookie: %s</p>"
+               "<form action=\"\" method=\"post\"><div>"
+               "<label>user</label><input type=\"text\" name=\"user\"><br>"
+               "<label>password</label><input type=\"password\" name=\"password\"><br>"
+               "<button type=\"submit\">login</button>"
+               "</div></form>"
+               "</body></html>",
+               url,
+               method,
+               version,
+               *upload_data_size,
+               cookie);
+
+      response = MHD_create_response_from_buffer(strlen(page),
+                                                 (void*)page,
+                                                 MHD_RESPMEM_MUST_FREE);
+
+      if (created != NULL) set_session(created, response);
+
+      ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
+      MHD_destroy_response(response);
+    }
+    else
+    {
+      ret = answer_404(connection, url);
+    }
+  }
+  else if (strcmp(method, MHD_HTTP_METHOD_POST) == 0)
+  {
+    if (*upload_data_size)
+    {
+      ret = MHD_post_process(request->pp, upload_data, *upload_data_size);
+      *upload_data_size = 0;
+    }
+    else
+    {
+      printf("answer to POST request\n");
+      ret = answer_404(connection, url);
     }
   }
 

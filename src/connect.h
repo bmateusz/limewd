@@ -8,6 +8,7 @@
 #endif
 
 #include "mhd.h"
+#include "request.h"
 #include <string.h>
 
 void get_ip_str(const struct sockaddr *sa,
@@ -20,7 +21,7 @@ int on_client_connect(void *cls,
 
 void request_completed(void *cls,
                        struct MHD_Connection *connection,
-                       void **con_cls,
+                       void **ptr,
                        enum MHD_RequestTerminationCode toe);
 
 #endif

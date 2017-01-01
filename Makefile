@@ -8,9 +8,10 @@ CFLAGS=-c -O0 -Wall
 else
 CC=cc
 CFLAGS=-c -g -Wall
+ADDLDFLAGS=-fsanitize=address,leak,undefined
 endif
 
-LDFLAGS=-lmicrohttpd -lsqlite3
+LDFLAGS=-lmicrohttpd -lsqlite3 $(ADDLDFLAGS)
 SOURCES=$(wildcard *.c) $(wildcard src/*.c)
 OBJECTS=$(SOURCES:src/%.c=src/.%.o)
 DEPENDENCIES=$(OBJECTS:.o=.d)

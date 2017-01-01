@@ -37,7 +37,7 @@ int answer_404(struct MHD_Connection *connection,
     MHD_destroy_response(response);
   }
   else ret = MHD_NO;
-  printf("404 error");
+  printf("404 error\n");
   return ret;
 }
 
@@ -57,6 +57,6 @@ int answer_500(struct MHD_Connection *connection)
     MHD_destroy_response(response);
   }
   else ret = MHD_NO;
-  printf("500 error");
+  printf("500 error\n");
   return ret;
 }
