@@ -5,6 +5,7 @@
 #include "common.h"
 #include "session.h"
 #include "static.h"
+#include "js.h"
 #include "request.h"
 #include "auth.h"
 #include <string.h>

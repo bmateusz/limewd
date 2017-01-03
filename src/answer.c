@@ -15,27 +15,26 @@ int answer_to_connection(void *cls,
                          const char *upload_data,
                          size_t *upload_data_size,
                          void **ptr)
+{
+  char *page;
+  struct MHD_Response *response;
+  struct Request *request = *ptr;
+  int ret = MHD_NO;
+
+  if (request == NULL)
   {
-    char *page;
-    struct MHD_Response *response;
-    struct Request *request = *ptr;
-    int ret = MHD_NO;
+    request = construct_request();
+    *ptr = request;
 
-    if (request == NULL)
+    MHD_get_connection_values(connection, MHD_HEADER_KIND, print_out_key, NULL);
+
+    if (strcmp(method, MHD_HTTP_METHOD_POST) == 0)
     {
-      request = malloc(sizeof(struct Request));
-      *ptr = request;
+      request->ptr = construct_auth();
+      request->pp = MHD_create_post_processor(connection, 256, &auth_iterator, request->ptr);
+    }
 
-      MHD_get_connection_values(connection, MHD_HEADER_KIND, print_out_key, NULL);
-
-      if (strcmp(method, MHD_HTTP_METHOD_POST) == 0)
-      {
-        request->pp = MHD_create_post_processor(connection, 256, &auth_iterator, request);
-      }
-      else
-      {
-        request->pp = NULL;
-      }
+    printf("headers passed\n");
 
     return MHD_YES;
   }
@@ -45,12 +44,16 @@ int answer_to_connection(void *cls,
 
     if (strncmp(url, "/static/", 8) == 0)
     {
-      ret = answer_static(connection, url, ptr);
+      ret = answer_static(connection, url);
+    }
+    else if (strncmp(url, "/js", 3) == 0)
+    {
+      printf("answer js\n");
+      ret = answer_js(connection, url);
     }
     else if (strcmp(url, "/") == 0)
     {
-      char *created = NULL;
-      const char *cookie = check_or_create_session(connection, &created);
+      struct Session *session = construct_session(connection);
 
       page = (char*)malloc(1024);
       snprintf(page,
@@ -71,15 +74,16 @@ int answer_to_connection(void *cls,
                method,
                version,
                *upload_data_size,
-               cookie);
+               session->cookie);
 
       response = MHD_create_response_from_buffer(strlen(page),
                                                  (void*)page,
                                                  MHD_RESPMEM_MUST_FREE);
 
-      if (created != NULL) set_session(created, response);
+      ret = destruct_session(session, response);
 
-      ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
+      ret &= MHD_queue_response(connection, MHD_HTTP_OK, response);
+
       MHD_destroy_response(response);
     }
     else
@@ -96,7 +100,10 @@ int answer_to_connection(void *cls,
     }
     else
     {
-      printf("answer to POST request\n");
+      struct Auth *auth = request->ptr;
+      printf("answer to POST for %s role %d\n",
+             auth->user,
+             auth->roles);
       ret = answer_404(connection, url);
     }
   }

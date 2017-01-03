@@ -4,6 +4,8 @@
 #include <time.h>
 
 #include "mhd.h"
+#include "duktape.h"
+#include "sqlite.h"
 #include "answer.h"
 #include "connect.h"
 

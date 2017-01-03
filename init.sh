@@ -1,9 +1,12 @@
 #!/bin/sh
 
+set -e
+
 BASEDIR=$(dirname "$0")
 LIBMICROHTTPD=libmicrohttpd-0.9.52
-SQLITE=sqlite-autoconf-3150100
-DUKTAPE=duktape-1.6.0
+SQLITE_YEAR=2017
+SQLITE=sqlite-autoconf-3160000
+DUKTAPE=duktape-2.0.0
 
 echo "Create lib directory"
 cd $BASEDIR
@@ -17,7 +20,8 @@ else
   echo "Download libmicrohttpd"
   wget ftp://ftp.gnu.org/gnu/libmicrohttpd/$LIBMICROHTTPD.tar.gz
   tar xf $LIBMICROHTTPD.tar.gz
-  cd $LIBMICROHTTPD
+  mv $LIBMICROHTTPD libmicrohttpd
+  cd libmicrohttpd
   ./configure
   make all
   cd ..
@@ -28,9 +32,10 @@ then
   echo "Skip sqlite"
 else
   echo "Download sqlite"
-  wget https://www.sqlite.org/2016/$SQLITE.tar.gz
+  wget https://www.sqlite.org/$SQLITE_YEAR/$SQLITE.tar.gz
   tar xf $SQLITE.tar.gz
-  cd $SQLITE
+  mv $SQLITE sqlite
+  cd sqlite
   ./configure
   make all
   cd ..
@@ -43,10 +48,18 @@ else
   echo "Download duktape"
   wget http://duktape.org/$DUKTAPE.tar.xz
   tar xf $DUKTAPE.tar.xz
+  mv $DUKTAPE duktape
 fi
 
-# echo "Clone jsmn"
-# git clone https://github.com/zserge/jsmn
+if [ "$1" = "install" ]
+then
+  echo "Install libmicrohttpd"
+  cd libmicrohttpd
+  make install
+  cd ..
 
-# echo "Clone jemalloc"
-# git clone https://github.com/jemalloc/jemalloc
+  echo "Install sqlite"
+  cd sqlite
+  make install
+  cd ..
+fi

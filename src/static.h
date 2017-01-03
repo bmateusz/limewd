@@ -8,7 +8,6 @@
 #include <string.h>
 
 int answer_static(struct MHD_Connection *connection,
-                  const char *url,
-                  void **ptr);
+                  const char *url);
 
 #endif

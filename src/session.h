@@ -3,10 +3,15 @@
 
 #include "mhd.h"
 
-const char *check_or_create_session(struct MHD_Connection *connection,
-                                    char **created);
+struct Session
+{
+  char *created;
+  const char *cookie;
+};
 
-int set_session(char *session,
-                struct MHD_Response *response);
+struct Session *construct_session(struct MHD_Connection *connection);
+
+int destruct_session(struct Session *session,
+                     struct MHD_Response *response);
 
 #endif

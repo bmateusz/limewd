@@ -6,14 +6,14 @@ else ifdef CLANG
 CC=clang
 CFLAGS=-c -O0 -Wall
 else
-CC=cc
+CC=gcc-6
 CFLAGS=-c -g -Wall
 ADDLDFLAGS=-fsanitize=address,leak,undefined
 endif
 
-LDFLAGS=-lmicrohttpd -lsqlite3 $(ADDLDFLAGS)
-SOURCES=$(wildcard *.c) $(wildcard src/*.c)
-OBJECTS=$(SOURCES:src/%.c=src/.%.o)
+LDFLAGS=-lm -lmicrohttpd -lsqlite3 $(ADDLDFLAGS)
+SOURCES=$(wildcard src/*.c)
+OBJECTS=$(SOURCES:src/%.c=src/.%.o) lib/duktape/src/.duktape.o
 DEPENDENCIES=$(OBJECTS:.o=.d)
 EXECUTABLE=myway
 

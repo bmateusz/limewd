@@ -7,9 +7,16 @@ int main(int argc, char *argv[])
 
   srand(time(&t));
 
-  printf("start %s\n", argv[0]);
+  printf("start %s\n"
+         "libmicrohttpd version: v%s\n"
+         "duktape version: %s\n"
+         "sqlite version: v%s\n",
+         argv[0],
+         MHD_get_version(),
+         DUK_GIT_DESCRIBE,
+         SQLITE_VERSION);
 
-  daemon = MHD_start_daemon(MHD_USE_DEBUG | MHD_USE_SELECT_INTERNALLY,
+  daemon = MHD_start_daemon(MHD_USE_DEBUG | MHD_USE_EPOLL_INTERNALLY,
                             PORT,
                             &on_client_connect, NULL,
                             &answer_to_connection, NULL,

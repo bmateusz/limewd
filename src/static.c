@@ -1,11 +1,10 @@
 #include "static.h"
 
 int answer_static(struct MHD_Connection *connection,
-                  const char *url,
-                  void **ptr)
+                  const char *url)
 {
   struct MHD_Response *response;
-  int ret;
+  int ret = MHD_NO;
   int fd;
   struct stat sbuf;
 
@@ -34,10 +33,10 @@ int answer_static(struct MHD_Connection *connection,
     {
       response = MHD_create_response_from_fd_at_offset64(sbuf.st_size, fd, 0);
 
-      MHD_add_response_header(response, MHD_HTTP_HEADER_CONTENT_TYPE, mime);
-      MHD_add_response_header(response, MHD_HTTP_HEADER_ETAG, etag);
-      MHD_add_response_header(response, MHD_HTTP_HEADER_CACHE_CONTROL, "max-age=5"); /* 86400 */
-      ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
+      ret = MHD_add_response_header(response, MHD_HTTP_HEADER_CONTENT_TYPE, mime);
+      ret &= MHD_add_response_header(response, MHD_HTTP_HEADER_ETAG, etag);
+      ret &= MHD_add_response_header(response, MHD_HTTP_HEADER_CACHE_CONTROL, "max-age=5"); /* 86400 */
+      ret &= MHD_queue_response(connection, MHD_HTTP_OK, response);
       MHD_destroy_response(response);
     }
   }

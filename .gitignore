@@ -2,5 +2,6 @@ lib
 tags
 myway
 src/.*
+js
 static
 
