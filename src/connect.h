@@ -1,3 +1,7 @@
+/**
+ * @file connect.h
+ * Connection handler.
+ */
 #ifndef CONNECT_H
 #define CONNECT_H
 
@@ -9,7 +13,6 @@
 
 #include "mhd.h"
 #include "request.h"
-#include <string.h>
 
 void get_ip_str(const struct sockaddr *sa,
                 char *s,

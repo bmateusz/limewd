@@ -1,3 +1,7 @@
+/**
+ * @file js.h
+ * Answer with server-side JavaScript.
+ */
 #ifndef JS_H
 #define JS_H
 

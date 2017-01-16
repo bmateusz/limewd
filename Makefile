@@ -28,10 +28,13 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 	@$(CC) -MM -MF $(@:.o=.d) -MT $@ $(CFLAGS) $<
 
-.PHONY: clean
+.PHONY: clean tag doc
 clean:
 	$(RM) $(OBJECTS) $(DEPENDENCIES) $(EXECUTABLE)
 
-tag: tags
+tag:
 	$(RM) tags
 	ctags -R -h ".c.h"
+
+doc:
+	doxygen

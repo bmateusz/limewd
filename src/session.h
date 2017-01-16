@@ -1,3 +1,7 @@
+/**
+ * @file session.h
+ * Session handling.
+ */
 #ifndef SESSION_H
 #define SESSION_H
 

@@ -1,15 +1,23 @@
+/**
+ * @file auth.h
+ * Authentication provider.
+ */
 #ifndef AUTH_H
 #define AUTH_H
 
 #include "mhd.h"
-#include <string.h>
 
+/** Struct for authentication. */
 struct Auth
 {
+  /** user name */
   char user[128];
+
+  /** roles granted */
   int roles;
 };
 
+/** Constructor of Auth struct. */
 struct Auth *construct_auth();
 
 int auth_iterator(void *cls,

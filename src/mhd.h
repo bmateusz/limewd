@@ -1,3 +1,7 @@
+/**
+ * @file mhd.h
+ * Includes libmicrohttpd library.
+ */
 #ifndef MHD_H
 #define MHD_H
 
@@ -11,5 +15,6 @@
 #include <microhttpd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #endif

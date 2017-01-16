@@ -1,3 +1,7 @@
+/**
+ * @file mime.h
+ * Mime type handling.
+ */
 #ifndef MIME_H
 #define MIME_H
 
