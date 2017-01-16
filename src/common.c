@@ -13,7 +13,7 @@ int answer_copy(struct MHD_Connection *connection,
   if (response)
   {
     ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
-    ret |= MHD_add_response_header(response, MHD_HTTP_HEADER_CONTENT_TYPE, "text/html");
+    ret &= MHD_add_response_header(response, MHD_HTTP_HEADER_CONTENT_TYPE, "text/html");
     MHD_destroy_response(response);
   }
   else ret = MHD_NO;
