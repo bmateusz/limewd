@@ -10,11 +10,19 @@
 
 enum
 {
+  MIME_UNKNOWN_T,
   MIME_PNG,
+  MIME_JPG,
+  MIME_GIF,
+  MIME_SVG,
   MIME_TXT,
-  MIME_UNKNOWN_T
+  MIME_HTML,
+  MIME_JS,
+  MIME_JSON,
+  MIME_CSS,
+  MIME_END_T
 } mime_t;
 
-const char *get_mime(const char *filename);
+const char *get_mime(const char *filepath);
 
 #endif

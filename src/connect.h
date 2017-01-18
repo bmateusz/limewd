@@ -14,10 +14,6 @@
 #include "mhd.h"
 #include "request.h"
 
-void get_ip_str(const struct sockaddr *sa,
-                char *s,
-                unsigned int maxlen);
-
 int on_client_connect(void *cls,
                       const struct sockaddr *addr,
                       socklen_t addrlen);

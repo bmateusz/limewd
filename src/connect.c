@@ -1,8 +1,8 @@
 #include "connect.h"
 
-void get_ip_str(const struct sockaddr *sa,
-                char *s,
-                unsigned int maxlen)
+static void get_ip_str(const struct sockaddr *sa,
+                       char *s,
+                       unsigned int maxlen)
 {
   switch(sa->sa_family) {
     case AF_INET:
