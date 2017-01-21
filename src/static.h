@@ -13,9 +13,9 @@
 /** Answer to static request.
  *
  * @param connection the connection identifying the client
- * @param url the URI called from the client
+ * @param url the Url struct with the parsed URI called from the client
  */
 int answer_static(struct MHD_Connection *connection,
-                  const char *url);
+                  struct Url *url);
 
 #endif

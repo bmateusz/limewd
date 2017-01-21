@@ -5,12 +5,12 @@
 #ifndef MIME_H
 #define MIME_H
 
-#include <string.h>
-#include <stdio.h>
+#include "url.h"
 
 enum
 {
   MIME_UNKNOWN_T,
+  MIME_ES,
   MIME_PNG,
   MIME_JPG,
   MIME_GIF,
@@ -23,6 +23,6 @@ enum
   MIME_END_T
 } mime_t;
 
-const char *get_mime(const char *filepath);
+const char *get_mime(const struct Url *url);
 
 #endif

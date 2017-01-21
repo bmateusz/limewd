@@ -25,7 +25,7 @@ static duk_ret_t native_print(duk_context *ctx) {
 }
 
 int answer_js(struct MHD_Connection *connection,
-              const char *url)
+              struct Url *url)
 {
   int ret = MHD_NO;
   duk_context *ctx = duk_create_heap_default();
@@ -38,10 +38,10 @@ int answer_js(struct MHD_Connection *connection,
   duk_push_global_object(ctx);
   duk_push_c_function(ctx, native_print, DUK_VARARGS);
   duk_put_prop_string(ctx, -2, "print");
-  duk_push_string(ctx, url);
+  duk_push_string(ctx, url->url);
   duk_put_prop_string(ctx, -2, "url");
 
-  push_file_as_string(ctx, "js/process.js");
+  push_file_as_string(ctx, url->path);
   if (duk_peval(ctx) != 0) {
     printf("Error: %s\n", duk_safe_to_string(ctx, -1));
   }

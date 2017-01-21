@@ -8,8 +8,9 @@
 #include "mhd.h"
 #include "duktape.h"
 #include "common.h"
+#include "url.h"
 
 int answer_js(struct MHD_Connection *connection,
-              const char *url);
+              struct Url *url);
 
 #endif

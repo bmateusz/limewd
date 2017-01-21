@@ -6,11 +6,14 @@
 #define REQUEST_H
 
 #include "mhd.h"
+#include "url.h"
 
 struct Request
 {
   void *ptr;
   struct MHD_PostProcessor *pp;
+  struct Url *url;
+  struct Session *session;
 };
 
 struct Request *construct_request();

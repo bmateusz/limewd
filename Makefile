@@ -1,13 +1,13 @@
 
 ifdef REL
 CC=gcc-6 -flto
-CFLAGS=-c -O3 -Wall
+CFLAGS=-c -O3 -Wall -Wpedantic
 else ifdef CLANG
 CC=clang
-CFLAGS=-c -O0 -Wall
+CFLAGS=-c -O0 -Wall -Wpedantic
 else
 CC=gcc-6
-CFLAGS=-c -g -Wall
+CFLAGS=-c -g -Wall -Wpedantic
 ADDLDFLAGS=-fsanitize=address,leak,undefined
 endif
 

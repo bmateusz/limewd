@@ -1,15 +1,15 @@
 #include "static.h"
 
 int answer_static(struct MHD_Connection *connection,
-                  const char *url)
+                  struct Url *url)
 {
   struct MHD_Response *response;
   int ret = MHD_NO;
   int fd;
   struct stat sbuf;
 
-  const char *filename = url + 1;
-  const char *mime = get_mime(filename);
+  const char *filename = url->path;
+  const char *mime = get_mime(url);
   char etag[32];
   const char *if_none_match;
 
@@ -44,7 +44,7 @@ int answer_static(struct MHD_Connection *connection,
   {
     printf("Could not open %s\n", filename);
     close(fd);
-    ret = answer_404(connection, url);
+    ret = answer_404(connection, url->url);
   }
   return ret;
 }

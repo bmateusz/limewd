@@ -28,6 +28,8 @@ int answer_to_connection(void *cls,
 
     MHD_get_connection_values(connection, MHD_HEADER_KIND, print_out_key, NULL);
 
+    request->url = construct_url(url);
+
     if (strcmp(method, MHD_HTTP_METHOD_POST) == 0)
     {
       request->ptr = construct_auth();
@@ -42,14 +44,15 @@ int answer_to_connection(void *cls,
   {
     printf("Answer to url <%s>\n", url);
 
-    if (strncmp(url, "/static/", 8) == 0)
-    {
-      ret = answer_static(connection, url);
-    }
-    else if (strncmp(url, "/js", 3) == 0)
+    if (request->url->ext && strcmp(request->url->ext, "es") == 0)
     {
       printf("answer js\n");
-      ret = answer_js(connection, url);
+      ret = answer_js(connection, request->url);
+    }
+    else if (1)
+    {
+      printf("answer static\n");
+      ret = answer_static(connection, request->url);
     }
     else if (strcmp(url, "/") == 0)
     {

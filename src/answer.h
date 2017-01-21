@@ -8,6 +8,7 @@
 #include "mhd.h"
 #include "common.h"
 #include "session.h"
+#include "url.h"
 #include "static.h"
 #include "js.h"
 #include "request.h"
