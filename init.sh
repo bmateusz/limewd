@@ -13,9 +13,9 @@ cd $BASEDIR
 usage()
 {
   echo "usage: init.sh [libs] [install] [deb]"
-  echo "  libs - Create lib directory, download a make libmicrohttpd, sqlite, duktape."
-  echo "  install - Install make install libmicrohttpd, sqlite. Requires root privileges."
-  echo "  deb - Install install development environment with apt-get. Requires root privileges and Debian-like OS."
+  echo "  libs - Create lib directory, download and make libmicrohttpd, sqlite, duktape."
+  echo "  install - Install libmicrohttpd, sqlite. Requires root privileges."
+  echo "  deb - Install development environment with apt-get. Requires root privileges and Debian-like OS."
 }
 
 libs()
