@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
 {
   struct Config *config;
   struct MHD_Daemon *daemon;
+  int ret = 0;
 
   init_random();
 
@@ -34,12 +35,14 @@ int main(int argc, char *argv[])
   if (daemon == NULL)
   {
     printf("Could not start daemon\n");
-    return 1;
+    ret = 1;
   }
-
-  (void)getchar();
+  else
+  {
+    (void)getchar();
+  }
 
   stop_service(daemon, config);
 
-  return 0;
+  return ret;
 }
