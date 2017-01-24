@@ -13,14 +13,15 @@ endif
 
 LDFLAGS=-lm -lmicrohttpd -lsqlite3 $(ADDLDFLAGS)
 SOURCES=$(wildcard src/*.c)
-OBJECTS=$(SOURCES:src/%.c=src/.%.o) lib/duktape/src/.duktape.o
+OBJECTS=$(SOURCES:src/%.c=src/.%.o)
 DEPENDENCIES=$(OBJECTS:.o=.d)
+ADDOBJECTS=lib/duktape/src/.duktape.o
 EXECUTABLE=myway
 
 all: $(SOURCES) $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+$(EXECUTABLE): $(OBJECTS) $(ADDOBJECTS)
+	$(CC) $(OBJECTS) $(ADDOBJECTS) $(LDFLAGS) -o $@
 
 -include $(DEPENDENCIES)
 
