@@ -2,9 +2,9 @@
  * @file main.c
  * Contains the main entry point of the program
  */
-#include "myway.h"
+#include "lmwd.h"
 
-/** Main program calling functions in myway.c.
+/** Main program calling functions in lmwd.c.
  *
  * Tasks:
  *  - init random generator

@@ -1,4 +1,4 @@
-#include "myway.h"
+#include "lmwd.h"
 
 void print_info(const char *executable, struct Config *config)
 {

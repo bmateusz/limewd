@@ -1,12 +1,12 @@
 /**
- * @file myway.h
+ * @file lmwd.h
  * Main header of the library.
  *
  * @mainpage
- * There will be the introduction.
+ * There will be the introduction of lmwd (Low Memory Web Daemon)
  */
-#ifndef MYWAY_H
-#define MYWAY_H
+#ifndef LMWD_H
+#define LMWD_H
 
 #include <time.h>
 

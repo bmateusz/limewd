@@ -16,7 +16,7 @@ SOURCES=$(wildcard src/*.c)
 OBJECTS=$(SOURCES:src/%.c=src/.%.o)
 DEPENDENCIES=$(OBJECTS:.o=.d)
 ADDOBJECTS=lib/duktape/src/.duktape.o
-EXECUTABLE=myway
+EXECUTABLE=lmwd
 
 all: $(SOURCES) $(EXECUTABLE)
 
