@@ -60,11 +60,19 @@ libs()
     wget http://duktape.org/$DUKTAPE.tar.xz
     tar xf $DUKTAPE.tar.xz
     mv $DUKTAPE duktape
+    cd duktape
+    make -f Makefile.sharedlibrary
+    cd ..
   fi
+
+  cd ..
 }
 
 install()
 {
+  echo "Requires root privileges (sudo ./init.sh install)"
+  cd lib
+
   echo "Install libmicrohttpd"
   cd libmicrohttpd
   make install
@@ -74,11 +82,21 @@ install()
   cd sqlite
   make install
   cd ..
+
+  echo "Install duktape"
+  cd duktape
+  make -f Makefile.sharedlibrary install
+  cd ..
+
+  echo "Run ldconfig"
+  ldconfig
+  cd ..
 }
 
 deb()
 {
-  apt-get install build-essential gcc-6 doxygen graphviz ctags
+  echo "Requires root privileges (sudo ./init.sh deb)"
+  apt-get install build-essential libgcrypt20-dev libgnutls-dev doxygen graphviz exuberant-ctags
 }
 
 if [ "$#" -eq 0 ]
@@ -99,6 +117,10 @@ do
 
     deb)
       deb
+    ;;
+
+    *)
+      usage
     ;;
   esac
 
