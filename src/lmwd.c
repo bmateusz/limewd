@@ -29,17 +29,38 @@ struct Config *parse_config(int argc, char *argv[])
 {
   struct Config *config = malloc(sizeof(struct Config));
   int i;
+  int error = 0;
 
   config->port = 8888; /* default port */
 
-  for (i = 1; i < argc; ++i)
+  for (i = 1; i < argc && !error; ++i)
   {
     if (strcmp("-p", argv[i]) == 0 && ++i < argc)
     {
-      sscanf(argv[i], "%hu", &(config->port));
+      error = sscanf(argv[i], "%hu", &(config->port));
+      if (error < 1
+          || config->port < 1
+          || config->port >= 65535)
+      {
+        error = -1;
+        printf("Port has to be a number between 1 and 65535\n");
+      }
+    }
+    else
+    {
+      printf("usage:\n  %s [-p port]\n", argv[0]);
+      error = -1;
     }
   }
-  return config;
+  if (error >= 0)
+  {
+    return config;
+  }
+  else
+  {
+    free(config);
+    return NULL;
+  }
 }
 
 struct MHD_Daemon *start_service(struct Config *config)
@@ -56,6 +77,9 @@ struct MHD_Daemon *start_service(struct Config *config)
 
 void stop_service(struct MHD_Daemon *daemon, struct Config *config)
 {
-  MHD_stop_daemon(daemon);
+  if (daemon != NULL)
+  {
+    MHD_stop_daemon(daemon);
+  }
   free(config);
 }

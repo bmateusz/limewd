@@ -20,26 +20,28 @@
  */
 int main(int argc, char *argv[])
 {
-  struct Config *config;
-  struct MHD_Daemon *daemon;
+  struct Config *config = NULL;
+  struct MHD_Daemon *daemon = NULL;
   int ret = 0;
 
   init_random();
 
   config = parse_config(argc, argv);
 
-  print_info(argv[0], config);
-
-  daemon = start_service(config);
-
-  if (daemon == NULL)
+  if (config != NULL)
   {
-    printf("Could not start daemon\n");
-    ret = 1;
-  }
-  else
-  {
-    (void)getchar();
+    print_info(argv[0], config);
+    daemon = start_service(config);
+
+    if (daemon != NULL)
+    {
+      (void)getchar();
+    }
+    else
+    {
+      printf("Could not start daemon\n");
+      ret = 1;
+    }
   }
 
   stop_service(daemon, config);
