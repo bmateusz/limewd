@@ -3,7 +3,8 @@
  * Main header of the library.
  *
  * @mainpage
- * There will be the introduction of lmwd (Low Memory Web Daemon)
+ * There will be the introduction of limewd,
+ * the Lightweight Minimal Ecmascript powered Www Daemon
  */
 #ifndef LMWD_H
 #define LMWD_H
