@@ -5,13 +5,16 @@ CFLAGS=-c -O3 -Wall -std=c11
 else ifdef CLANG
 CC=clang
 CFLAGS=-c -O0 -Wall -std=c11
+else ifdef TRAVIS
+CC=gcc
+CFLAGS=-c -g -Wall -std=c11
 else
 CC=gcc
 CFLAGS=-c -g -Wall -std=c11
 ADDLDFLAGS=-fsanitize=address,leak,undefined
 endif
 
-LDFLAGS=-lm -lmicrohttpd -lsqlite3 -lduktape $(ADDLDFLAGS)
+LDFLAGS=-lmicrohttpd -lsqlite3 -lduktape -lm $(ADDLDFLAGS)
 SOURCES=$(wildcard src/*.c)
 OBJECTS=$(SOURCES:src/%.c=src/.%.o)
 DEPENDENCIES=$(OBJECTS:.o=.d)

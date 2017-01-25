@@ -97,13 +97,13 @@ install()
 deb()
 {
   echo "Requires root privileges (sudo ./init.sh deb)"
-  apt-get install build-essential libgcrypt20-dev libgnutls-dev doxygen graphviz exuberant-ctags
+  apt-get install build-essential libgcrypt-dev libgnutls-dev doxygen graphviz exuberant-ctags
 }
 
 get_deps()
 {
   echo "Requires root privileges (sudo ./init.sh get-deps)"
-  apt-get install libmicrohttpd-dev libsqlite3-dev duktape-dev libgcrypt20-dev libgnutls-dev doxygen graphviz
+  apt-get install libmicrohttpd-dev libsqlite3-dev duktape-dev libgcrypt-dev libgnutls-dev doxygen graphviz
 }
 
 if [ "$#" -eq 0 ]

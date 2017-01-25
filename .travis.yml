@@ -1,13 +1,17 @@
 languate: c
 dist: trusty
-sudo: false
+sudo: required
 addons:
   apt:
     packages:
-    - libmicrohttpd-dev
-    - libsqlite3-dev
-    - duktape-dev
-    - libgcrypt20-dev
+    - libgcrypt-dev
     - libgnutls-dev
     - doxygen
     - graphviz
+install:
+  - ./init.sh libs
+  - ./init.sh install
+script:
+  - make
+  - make doc
+  - ./lmwd -v
