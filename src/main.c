@@ -16,7 +16,8 @@
  *
  * @param argc number of command line arguments
  * @param argv array of command line arguments
- * @return 0 on success
+ * @return 0 on success, 1 on bad configuration, 2 when the service could
+ * not start.
  */
 int main(int argc, char *argv[])
 {
@@ -40,8 +41,13 @@ int main(int argc, char *argv[])
     else
     {
       printf("Could not start daemon\n");
-      ret = 1;
+      ret = 2;
     }
+  }
+  else
+  {
+    // Bad configuration
+    ret = 1;
   }
 
   stop_service(daemon, config);

@@ -52,6 +52,7 @@ struct Config *parse_config(int argc, char *argv[])
       error = -1;
     }
   }
+
   if (error >= 0)
   {
     return config;
@@ -65,14 +66,20 @@ struct Config *parse_config(int argc, char *argv[])
 
 struct MHD_Daemon *start_service(struct Config *config)
 {
-  if (config == NULL) return NULL;
-  return MHD_start_daemon(MHD_USE_DEBUG | MHD_USE_EPOLL_INTERNALLY,
-                          config->port,
-                          &on_client_connect, NULL,
-                          &answer_to_connection, NULL,
-                          MHD_OPTION_CONNECTION_TIMEOUT, 15,
-                          MHD_OPTION_NOTIFY_COMPLETED, &request_completed, NULL,
-                          MHD_OPTION_END);
+  if (config != NULL)
+  {
+    return MHD_start_daemon(MHD_USE_DEBUG | MHD_USE_EPOLL_INTERNALLY,
+                            config->port,
+                            &on_client_connect, NULL,
+                            &answer_to_connection, NULL,
+                            MHD_OPTION_CONNECTION_TIMEOUT, 15,
+                            MHD_OPTION_NOTIFY_COMPLETED, &request_completed, NULL,
+                            MHD_OPTION_END);
+  }
+  else
+  {
+    return NULL;
+  }
 }
 
 void stop_service(struct MHD_Daemon *daemon, struct Config *config)

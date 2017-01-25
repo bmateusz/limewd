@@ -40,11 +40,13 @@ void init_random();
 struct Config *parse_config(int argc, char *argv[]);
 
 /** Start libmicrohttp daemon.
+ * It is safe to call with NULL parameter.
  * @param config the Config structure
  */
 struct MHD_Daemon *start_service(struct Config *config);
 
 /** Stop libmicrohttp daemon.
+ * It is safe to call with NULL parameters.
  * @param daemon the libmicrohttp daemon
  * @param config the Config structure
  */
