@@ -1,6 +1,8 @@
 ### :lemon: limewd
 Lightweight Minimal Ecmascript powered Www Daemon
 
+[![Build Status](https://travis-ci.org/bmateusz/limewd.svg?branch=master)](https://travis-ci.org/bmateusz/limewd)
+
 The goal of this project is to create a general purpose web server.
 I develop it in my free time.
 
