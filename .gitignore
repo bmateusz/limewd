@@ -2,5 +2,5 @@ lib
 tags
 lmwd
 src/.*
-doc
+docs
 www

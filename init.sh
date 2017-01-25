@@ -16,6 +16,7 @@ usage()
   echo "  libs - Create lib directory, download and make libmicrohttpd, sqlite, duktape."
   echo "  install - Install libmicrohttpd, sqlite. Requires root privileges."
   echo "  deb - Install development environment with apt-get. Requires root privileges and Debian-like OS."
+  echo "  get-deps - Install development libraries with apt-get. Requires root privileges and Debian-like OS."
 }
 
 libs()
@@ -99,6 +100,12 @@ deb()
   apt-get install build-essential libgcrypt20-dev libgnutls-dev doxygen graphviz exuberant-ctags
 }
 
+get_deps()
+{
+  echo "Requires root privileges (sudo ./init.sh get-deps)"
+  apt-get install libmicrohttpd-dev libsqlite3-dev duktape-dev libgcrypt20-dev libgnutls-dev doxygen graphviz
+}
+
 if [ "$#" -eq 0 ]
 then
   usage
@@ -117,6 +124,10 @@ do
 
     deb)
       deb
+    ;;
+
+    get-deps)
+      get_deps
     ;;
 
     *)

@@ -5,6 +5,6 @@
 #ifndef DUKTAPE_H
 #define DUKTAPE_H
 
-#include "../lib/duktape/src/duktape.h"
+#include <duktape.h>
 
 #endif

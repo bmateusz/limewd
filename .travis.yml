@@ -1,0 +1,11 @@
+languate: c
+addons:
+  apt:
+    packages:
+    - libmicrohttpd-dev
+    - libsqlite3-dev
+    - duktape-dev
+    - libgcrypt20-dev
+    - libgnutls-dev
+    - doxygen
+    - graphviz

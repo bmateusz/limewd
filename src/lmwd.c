@@ -2,19 +2,19 @@
 
 void print_info(const char *executable, struct Config *config)
 {
-  printf("start %s\n"
+  printf("limewd\n"
          "libmicrohttpd version: v%s\n"
          "duktape version: %s\n"
          "sqlite version: v%s\n",
-         executable,
          MHD_get_version(),
          DUK_GIT_DESCRIBE,
          SQLITE_VERSION);
 
   if (config)
   {
-    printf("\n"
-           "Port: %d\n",
+    printf("start %s\n"
+           "port: %d\n",
+           executable,
            config->port);
   }
 }
@@ -46,9 +46,14 @@ struct Config *parse_config(int argc, char *argv[])
         printf("Port has to be a number between 1 and 65535\n");
       }
     }
+    else if (strcmp("-v", argv[i]) == 0)
+    {
+      print_info(argv[0], NULL);
+      error = -1;
+    }
     else
     {
-      printf("usage:\n  %s [-p port]\n", argv[0]);
+      printf("usage:\n  %s [-p port] [-v]\n", argv[0]);
       error = -1;
     }
   }
