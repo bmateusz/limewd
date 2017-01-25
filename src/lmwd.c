@@ -32,6 +32,7 @@ struct Config *parse_config(int argc, char *argv[])
   int error = 0;
 
   config->port = 8888; /* default port */
+  config->run_mode = RUN_CONSOLE;
 
   for (i = 1; i < argc && !error; ++i)
   {
@@ -49,7 +50,7 @@ struct Config *parse_config(int argc, char *argv[])
     else if (strcmp("-v", argv[i]) == 0)
     {
       print_info(argv[0], NULL);
-      error = -1;
+      config->run_mode = RUN_NO_OP;
     }
     else
     {

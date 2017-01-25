@@ -1,4 +1,5 @@
 languate: c
+os: linux
 dist: trusty
 sudo: required
 addons:

@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
 
   config = parse_config(argc, argv);
 
-  if (config != NULL)
+  if (config != NULL
+      && config->run_mode == RUN_CONSOLE)
   {
     print_info(argv[0], config);
     daemon = start_service(config);
@@ -44,7 +45,8 @@ int main(int argc, char *argv[])
       ret = 2;
     }
   }
-  else
+  else if (config != NULL
+           && config->run_mode != RUN_NO_OP)
   {
     // Bad configuration
     ret = 1;

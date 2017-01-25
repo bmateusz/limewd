@@ -17,11 +17,20 @@
 #include "answer.h"
 #include "connect.h"
 
+enum RUN_MODE
+{
+  RUN_NO_OP,
+  RUN_CONSOLE,
+};
+
 /** Configuration structure. */
 struct Config
 {
   /** Port which will be used by the libmicrohttp daemon. */
   uint16_t port;
+
+  /** Run mode */
+  int run_mode;
 };
 
 /** Print information at startup.
