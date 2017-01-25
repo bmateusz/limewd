@@ -36,8 +36,9 @@ struct Config *parse_config(int argc, char *argv[])
 
   for (i = 1; i < argc && !error; ++i)
   {
-    if (strcmp("-p", argv[i]) == 0 && ++i < argc)
+    if (strcmp("-p", argv[i]) == 0 && i + 1 < argc)
     {
+      ++i;
       error = sscanf(argv[i], "%hu", &(config->port));
       if (error < 1
           || config->port < 1
