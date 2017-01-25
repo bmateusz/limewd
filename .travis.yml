@@ -10,7 +10,7 @@ addons:
     - graphviz
 install:
   - ./init.sh libs
-  - ./init.sh install
+  - sudo ./init.sh install
 script:
   - make
   - make doc
