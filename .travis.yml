@@ -1,6 +1,5 @@
 languate: c
 os: linux
-dist: trusty
 sudo: required
 addons:
   apt:
@@ -15,4 +14,5 @@ install:
 script:
   - make
   - make doc
+  - ./test.sh
   - ./lmwd -v
