@@ -6,7 +6,7 @@ BASEDIR=$(dirname "$0")
 LIBMICROHTTPD=libmicrohttpd-0.9.52
 SQLITE_YEAR=2017
 SQLITE=sqlite-autoconf-3160000
-DUKTAPE=duktape-2.0.0
+DUKTAPE=duktape-2.0.1
 
 cd $BASEDIR
 
