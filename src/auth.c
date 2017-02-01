@@ -51,3 +51,29 @@ int auth_user(struct Auth *auth,
   auth->roles = 1;
   return 1;
 }
+
+int init_auth()
+{
+  const char *dbpath = "db/auth.db";
+  const char *create_table =
+  "CREATE TABLE user(id INTEGER PRIMARY KEY ASC AUTOINCREMENT,"
+                    "name TEXT UNIQUE,"
+                    "password TEXT);";
+
+  int ret = 0;
+  sqlite3 *db = NULL;
+  sqlite3_stmt *stmt = NULL;
+
+  ret = sqlite3_open_v2(dbpath, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
+  // ret = sqlite3_open(dbpath, &db);
+  printf("open %d\n", ret);
+  ret = sqlite3_prepare_v2(db, create_table, -1, &stmt, NULL);
+  printf("prepare %d\n", ret);
+  ret = sqlite3_step(stmt);
+  printf("step %d\n", ret);
+
+  sqlite3_finalize(stmt);
+  sqlite3_close(db);
+
+  return 0;
+}

@@ -4,3 +4,4 @@ lmwd
 src/.*
 docs
 www
+db

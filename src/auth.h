@@ -6,6 +6,7 @@
 #define AUTH_H
 
 #include "mhd.h"
+#include "sqlite.h"
 
 /** Struct for authentication. */
 struct Auth
@@ -30,5 +31,7 @@ int auth_iterator(void *cls,
 
 int auth_user(struct Auth *auth,
               const char *password);
+
+int init_auth();
 
 #endif

@@ -49,6 +49,11 @@ int answer_to_connection(void *cls,
       printf("answer js\n");
       ret = answer_js(connection, request->url);
     }
+    else if (strcmp(url, "/auth") == 0)
+    {
+      // for testing
+      init_auth();
+    }
     else if (1)
     {
       printf("answer static\n");
