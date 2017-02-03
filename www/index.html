@@ -1,0 +1,57 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="style.css" rel="stylesheet">
+<script src="jquery/jquery-3.1.1.js"></script>
+<script src="jsonux.js"></script>
+</head>
+<body>
+<textarea id="jsonux">{
+  "id": "top",
+  "type": "div",
+  "js": "document.title = 'Hello jsonUx'",
+  "items": [
+    {
+      "id": "header",
+      "type": "h1",
+      "html": "jsonUx test page"
+    },
+    {
+      "id": "menu",
+      "type": "h2",
+      "html": "Introduction"
+    },
+    {
+      "id": "content",
+      "type": "p",
+      "html": "Welcome, this is a test page. On the right side you can edit the JSON file and see how the content of the page will change. And now, load a picture of a welsch corgie."
+    },
+    {
+      "id": "ein",
+      "type": "img",
+      "src": "ein.png"
+    },
+    {
+      "id": "footer",
+      "type": "p",
+      "html": "end."
+    }
+  ]
+}</textarea>
+
+<div id="body">generated content</div>
+
+<script>
+$("#jsonux").on('input', function() {
+  var json = JSON.parse($("#jsonux").val());
+  if (Object.keys(json).length > 0) {
+    $("#body").html("");
+    var jsonux = new JsonUx($("#body"), json);
+    jsonux.build();
+  }
+})
+$("#jsonux").trigger("input");
+</script>
+</body>
+</html>
