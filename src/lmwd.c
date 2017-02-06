@@ -32,6 +32,7 @@ struct Config *parse_config(int argc, char *argv[])
   int error = 0;
 
   config->port = 8888; /* default port */
+  config->timeout = 15; /* default timeout */
   config->run_mode = RUN_CONSOLE;
 
   for (i = 1; i < argc && !error; ++i)
@@ -48,6 +49,17 @@ struct Config *parse_config(int argc, char *argv[])
         printf("Port has to be a number between 1 and 65535\n");
       }
     }
+    else if (strcmp("-t", argv[i]) == 0 && i + 1 < argc)
+    {
+      ++i;
+      error = sscanf(argv[i], "%u", &(config->timeout));
+      if (error < 1
+          || config->timeout >= 65535)
+      {
+        error = -1;
+        printf("Invalid timeout value\n");
+      }
+    }
     else if (strcmp("-v", argv[i]) == 0)
     {
       print_info(argv[0], NULL);
@@ -55,7 +67,7 @@ struct Config *parse_config(int argc, char *argv[])
     }
     else
     {
-      printf("usage:\n  %s [-p port] [-v]\n", argv[0]);
+      printf("usage:\n  %s [-p port] [-t timeout] [-v]\n", argv[0]);
       error = -1;
     }
   }
@@ -79,7 +91,7 @@ struct MHD_Daemon *start_service(struct Config *config)
                             config->port,
                             &on_client_connect, NULL,
                             &answer_to_connection, NULL,
-                            MHD_OPTION_CONNECTION_TIMEOUT, 15,
+                            MHD_OPTION_CONNECTION_TIMEOUT, config->timeout,
                             MHD_OPTION_NOTIFY_COMPLETED, &request_completed, NULL,
                             MHD_OPTION_END);
   }

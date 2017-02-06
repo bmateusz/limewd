@@ -29,6 +29,9 @@ struct Config
   /** Port which will be used by the libmicrohttp daemon. */
   uint16_t port;
 
+  /** Timeout configured at startup of the http daemon. Use 0 for no timeout. */
+  unsigned int timeout;
+
   /** Run mode */
   int run_mode;
 };
