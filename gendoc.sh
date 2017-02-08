@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+if [ -z "$TRAVIS" ]
+then
+  echo "This script is for Travis CI only"
+  exit 1
+fi
+
 BASEDIR=$(dirname "$0")
 GH_REPO="github.com/bmateusz/limewd"
 
