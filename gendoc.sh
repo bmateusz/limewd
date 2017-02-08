@@ -1,11 +1,13 @@
 #!/bin/sh
 set -e
 
+BASEDIR=$(dirname "$0")
 GH_REPO="github.com/bmateusz/limewd"
 
+cd $BASEDIR
 rm -rf docs
 mkdir -p docs/html
-git clone -b gh-pages "http://$GH_REPO" docs/html
+git clone -b gh-pages "https://$GH_REPO" docs/html
 make doc
 cd docs/html
 
