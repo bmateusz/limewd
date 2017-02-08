@@ -1,6 +1,9 @@
 languate: c
 os: linux
 sudo: required
+branches:
+  only:
+    - master
 addons:
   apt:
     packages:
@@ -13,6 +16,7 @@ install:
   - sudo ./init.sh install
 script:
   - make
-  - make doc
   - ./test.sh
   - ./lmwd -v
+after_success:
+  - ./gendoc.sh
