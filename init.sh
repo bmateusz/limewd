@@ -109,7 +109,8 @@ install()
   if [ -n $INSTALL_LIB_PATH ]
   then
     echo "To use local libraries, run the following command:"
-    echo "  export LD_LIBRARY_PATH=$INSTALL_LIB_PATH"
+    echo "  export LD_LIBRARY_PATH=$INSTALL_LIB_PATH/lib"
+    echo "  export C_INCLUDE_PATH=$INSTALL_LIB_PATH/include"
   fi
 
   cd ..
