@@ -1,6 +1,6 @@
 languate: c
 os: linux
-sudo: required
+sudo: false
 branches:
   only:
     - master
@@ -12,8 +12,8 @@ addons:
     - doxygen
     - graphviz
 install:
-  - ./init.sh libs
-  - sudo ./init.sh install
+  - ./init.sh local libs install
+  - export LD_LIBRARY_PATH="$(pwd)/compiled/lib"
 script:
   - make
   - ./test.sh

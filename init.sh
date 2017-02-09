@@ -3,6 +3,8 @@
 set -e
 
 BASEDIR=$(dirname "$0")
+LIB_SRC_DIR=external
+LIB_BIN_DIR=compiled
 LIBMICROHTTPD=libmicrohttpd-0.9.52
 SQLITE_YEAR=2017
 SQLITE=sqlite-autoconf-3160000
@@ -12,18 +14,19 @@ cd $BASEDIR
 
 usage()
 {
-  echo "usage: init.sh [libs] [install] [deb]"
-  echo "  libs - Create lib directory, download and make libmicrohttpd, sqlite, duktape."
-  echo "  install - Install libmicrohttpd, sqlite. Requires root privileges."
+  echo "usage: init.sh [local] [libs] [install] [deb] [get-deps]"
+  echo "  local - Configure library install path to local dir."
+  echo "  libs - Create $LIB_SRC_DIR directory, download and make libmicrohttpd, sqlite, duktape."
+  echo "  install - Install libmicrohttpd, sqlite. Can requires root privileges, see parameter local."
   echo "  deb - Install development environment with apt-get. Requires root privileges and Debian-like OS."
   echo "  get-deps - Install development libraries with apt-get. Requires root privileges and Debian-like OS."
 }
 
 libs()
 {
-  echo "Create lib directory"
-  mkdir -p lib
-  cd lib
+  echo "Create $LIB_SRC_DIR directory"
+  mkdir -p $LIB_SRC_DIR
+  cd $LIB_SRC_DIR
 
   if [ -f $LIBMICROHTTPD.tar.gz ]
   then
@@ -34,7 +37,7 @@ libs()
     tar xf $LIBMICROHTTPD.tar.gz
     mv $LIBMICROHTTPD libmicrohttpd
     cd libmicrohttpd
-    ./configure
+    ./configure $CONFIGURE_FLAGS
     make all
     cd ..
   fi
@@ -48,7 +51,7 @@ libs()
     tar xf $SQLITE.tar.gz
     mv $SQLITE sqlite
     cd sqlite
-    ./configure
+    ./configure $CONFIGURE_FLAGS
     make all
     cd ..
   fi
@@ -62,6 +65,11 @@ libs()
     tar xf $DUKTAPE.tar.xz
     mv $DUKTAPE duktape
     cd duktape
+    if [ -n $INSTALL_LIB_PATH ]
+    then
+      # Duktape lacks configure script, so set the install dir if needed
+      sed -i "s:INSTALL_PREFIX=.*:INSTALL_PREFIX=$INSTALL_LIB_PATH:g" Makefile.sharedlibrary
+    fi
     make -f Makefile.sharedlibrary
     cd ..
   fi
@@ -69,10 +77,18 @@ libs()
   cd ..
 }
 
+install_local()
+{
+  mkdir -p $LIB_BIN_DIR
+  INSTALL_LIB_PATH="$(pwd)/$LIB_BIN_DIR"
+  CONFIGURE_FLAGS="--prefix=$INSTALL_LIB_PATH"
+  echo "Configure flags set to: $CONFIGURE_FLAGS"
+}
+
 install()
 {
-  echo "Requires root privileges (sudo ./init.sh install)"
-  cd lib
+  echo "Use parameter 'local' before, otherwise it requires root privileges (sudo ./init.sh install)"
+  cd $LIB_SRC_DIR
 
   echo "Install libmicrohttpd"
   cd libmicrohttpd
@@ -89,8 +105,13 @@ install()
   make -f Makefile.sharedlibrary install
   cd ..
 
-  echo "Run ldconfig"
-  ldconfig
+  echo "Run ldconfig if needed"
+  if [ -n $INSTALL_LIB_PATH ]
+  then
+    echo "To use local libraries, run the following command:"
+    echo "  export LD_LIBRARY_PATH=$INSTALL_LIB_PATH"
+  fi
+
   cd ..
 }
 
@@ -128,6 +149,10 @@ do
 
     get-deps)
       get_deps
+    ;;
+
+    local)
+      install_local
     ;;
 
     *)

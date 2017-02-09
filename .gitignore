@@ -1,4 +1,5 @@
-lib
+external
+compiled
 tags
 lmwd
 src/.*
