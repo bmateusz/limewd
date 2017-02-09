@@ -42,7 +42,7 @@ int answer_304(struct MHD_Connection *connection)
 }
 
 int answer_404(struct MHD_Connection *connection,
-               const char *url)
+               const char *url UNUSED)
 {
   struct MHD_Response *response;
   int ret = MHD_NO;

@@ -20,18 +20,18 @@ static void get_ip_str(const struct sockaddr *sa,
   }
 }
 
-int on_client_connect(void *cls,
+int on_client_connect(void *cls UNUSED,
                       const struct sockaddr *addr,
                       socklen_t addrlen)
 {
-  char str[INET6_ADDRSTRLEN];
-  get_ip_str(addr, str, INET6_ADDRSTRLEN);
+  char str[addrlen];
+  get_ip_str(addr, str, addrlen);
   printf("connected %s\n", str);
   return MHD_YES;
 }
 
-void request_completed(void *cls,
-                       struct MHD_Connection *connection,
+void request_completed(void *cls UNUSED,
+                       struct MHD_Connection *connection UNUSED,
                        void **ptr,
                        enum MHD_RequestTerminationCode toe)
 {

@@ -9,11 +9,11 @@ struct Auth *construct_auth()
 }
 
 int auth_iterator(void *cls,
-                  enum MHD_ValueKind kind,
+                  enum MHD_ValueKind kind UNUSED,
                   const char *key,
-                  const char *filename,
-                  const char *content_type,
-                  const char *transfer_encoding,
+                  const char *filename UNUSED,
+                  const char *content_type UNUSED,
+                  const char *transfer_encoding UNUSED,
                   const char *data, uint64_t off, size_t size)
 {
   struct Auth *auth = cls;

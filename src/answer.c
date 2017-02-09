@@ -1,17 +1,19 @@
 #include "answer.h"
 
-static int print_out_key(void *cls, enum MHD_ValueKind kind,
-                         const char *key, const char *value)
+static int print_out_key(void *cls UNUSED,
+                         enum MHD_ValueKind kind UNUSED,
+                         const char *key,
+                         const char *value)
 {
   printf("  %s: %s\n", key, value);
   return MHD_YES;
 }
 
-int answer_to_connection(void *cls,
+int answer_to_connection(void *cls UNUSED,
                          struct MHD_Connection *connection,
                          const char *url,
-                         const char *method,
-                         const char *version,
+                         const char *method UNUSED,
+                         const char *version UNUSED,
                          const char *upload_data,
                          size_t *upload_data_size,
                          void **ptr)

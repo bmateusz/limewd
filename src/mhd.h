@@ -17,4 +17,6 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define UNUSED __attribute__((unused))
+
 #endif

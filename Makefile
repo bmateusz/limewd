@@ -1,16 +1,11 @@
 
 ifdef REL
-CC=gcc -flto
-CFLAGS=-c -O3 -Wall -std=c99
-else ifdef CLANG
-CC=clang
-CFLAGS=-c -O0 -Wall -std=c99
+CFLAGS=-c -flto -O3 -Wall -Wextra -std=c99
+ADDLDFLAGS=-flto
 else ifdef TRAVIS
-CC=gcc
-CFLAGS=-c -g -Wall -std=c99
+CFLAGS=-c -g -Wall -Wextra -std=c99
 else
-CC=gcc
-CFLAGS=-c -g -Wall -std=c99
+CFLAGS=-c -g -Wall -Wextra -std=c99
 ADDLDFLAGS=-fsanitize=address,leak,undefined
 endif
 
