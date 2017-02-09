@@ -13,8 +13,8 @@ addons:
     - graphviz
 install:
   - ./init.sh local libs install
-  - export LD_LIBRARY_PATH="$(pwd)/compiled/lib"
-  - export C_INCLUDE_PATH="$(pwd)/compiled/include"
+  - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/compiled/lib
+  - export C_INCLUDE_PATH=$TRAVIS_BUILD_DIR/compiled/include
 script:
   - make
   - ./test.sh
