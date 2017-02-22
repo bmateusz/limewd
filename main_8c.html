@@ -68,14 +68,18 @@ Include dependency graph for main.c:</div>
 <map name="src_2main_8c" id="src_2main_8c">
 <area shape="rect" id="node3" href="lmwd_8h.html" title="Main header of the library." alt="" coords="695,83,759,112"/><area shape="rect" id="node7" href="mhd_8h.html" title="Includes libmicrohttpd library." alt="" coords="714,392,773,421"/><area shape="rect" id="node23" href="duktape_8h.html" title="Includes duktape library." alt="" coords="506,315,583,344"/><area shape="rect" id="node26" href="sqlite_8h.html" title="Includes sqlite library." alt="" coords="983,315,1047,344"/><area shape="rect" id="node30" href="answer_8h.html" title="Answer to connection." alt="" coords="447,160,522,189"/><area shape="rect" id="node68" href="connect_8h.html" title="Connection handler." alt="" coords="933,237,1010,267"/><area shape="rect" id="node33" href="common_8h.html" title="Common responses." alt="" coords="298,315,381,344"/><area shape="rect" id="node36" href="session_8h.html" title="Session handling." alt="" coords="647,237,725,267"/><area shape="rect" id="node39" href="url_8h_source.html" title="url.h" alt="" coords="395,392,441,421"/><area shape="rect" id="node44" href="static_8h.html" title="Answer static response." alt="" coords="202,237,266,267"/><area shape="rect" id="node54" href="js_8h.html" title="Answer with server&#45;side JavaScript." alt="" coords="447,237,490,267"/><area shape="rect" id="node60" href="request_8h.html" title="Request handling structure." alt="" coords="631,315,706,344"/><area shape="rect" id="node64" href="auth_8h.html" title="Authentication provider." alt="" coords="799,237,858,267"/><area shape="rect" id="node47" href="mime_8h.html" title="Mime type handling." alt="" coords="23,315,87,344"/></map>
 </div>
-</div><table class="memberdecls">
+</div>
+<p><a href="main_8c_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Main program calling functions in lmwd.c.  <a href="#a0ddf1224851353fc92bfbff6f499fa97"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Main program calling functions in <a class="el" href="lmwd_8c_source.html">lmwd.c</a>.  <a href="#a0ddf1224851353fc92bfbff6f499fa97"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Contains the main entry point of the program. </p>
+
+<p>Definition in file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a0ddf1224851353fc92bfbff6f499fa97"></a><!-- doxytag: member="main.c::main" ref="a0ddf1224851353fc92bfbff6f499fa97" args="(int argc, char *argv[])" -->
 <div class="memitem">
@@ -102,7 +106,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Main program calling functions in lmwd.c. </p>
+<p>Main program calling functions in <a class="el" href="lmwd_8c_source.html">lmwd.c</a>. </p>
 <p>Tasks:</p>
 <ul>
 <li>init random generator</li>
@@ -121,6 +125,46 @@ Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>0 on success, 1 on bad configuration, 2 when the service could not start. </dd></dl>
 
+<p>Definition at line <a class="el" href="main_8c_source.html#l00022">22</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p>References <a class="el" href="lmwd_8h_source.html#l00036">Config::run_mode</a>.</p>
+<div class="fragment"><pre class="fragment">{
+  <span class="keyword">struct </span><a class="code" href="struct_config.html" title="Configuration structure.">Config</a> *config = NULL;
+  <span class="keyword">struct </span>MHD_Daemon *daemon = NULL;
+  <span class="keywordtype">int</span> ret = 0;
+
+  init_random();
+
+  config = parse_config(argc, argv);
+
+  <span class="keywordflow">if</span> (config != NULL
+      &amp;&amp; config-&gt;<a class="code" href="struct_config.html#ae2b93d3aba47f89e31b3099436b60be2" title="Run mode.">run_mode</a> == RUN_CONSOLE)
+  {
+    print_info(argv[0], config);
+    daemon = start_service(config);
+
+    <span class="keywordflow">if</span> (daemon != NULL)
+    {
+      (void)getchar();
+    }
+    <span class="keywordflow">else</span>
+    {
+      printf(<span class="stringliteral">&quot;Could not start daemon\n&quot;</span>);
+      ret = 2;
+    }
+  }
+  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (config != NULL
+           &amp;&amp; config-&gt;<a class="code" href="struct_config.html#ae2b93d3aba47f89e31b3099436b60be2" title="Run mode.">run_mode</a> != RUN_NO_OP)
+  {
+    <span class="comment">// Bad configuration</span>
+    ret = 1;
+  }
+
+  stop_service(daemon, config);
+
+  <span class="keywordflow">return</span> ret;
+}
+</pre></div>
 </div>
 </div>
 </div><!-- contents -->

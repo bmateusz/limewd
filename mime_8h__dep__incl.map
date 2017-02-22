@@ -1,6 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$static_8h.html" title="Answer static response." alt="" coords="11,83,96,112"/>
-<area shape="rect" id="node5" href="$answer_8h.html" title="Answer to connection." alt="" coords="5,160,101,189"/>
-<area shape="rect" id="node7" href="$lmwd_8h.html" title="Main header of the library." alt="" coords="11,237,96,267"/>
-<area shape="rect" id="node9" href="$main_8c.html" title="Contains the main entry point of the program." alt="" coords="12,315,95,344"/>
+<area shape="rect" id="node3" href="$static_8h.html" title="Answer static response." alt="" coords="125,83,211,112"/>
+<area shape="rect" id="node17" href="$mime_8c_source.html" title="src/mime.c" alt="" coords="235,83,320,112"/>
+<area shape="rect" id="node5" href="$answer_8h.html" title="Answer to connection." alt="" coords="63,160,159,189"/>
+<area shape="rect" id="node15" href="$static_8c_source.html" title="src/static.c" alt="" coords="183,160,268,189"/>
+<area shape="rect" id="node7" href="$answer_8c_source.html" title="src/answer.c" alt="" coords="5,237,101,267"/>
+<area shape="rect" id="node9" href="$lmwd_8h.html" title="Main header of the library." alt="" coords="125,237,211,267"/>
+<area shape="rect" id="node11" href="$lmwd_8c_source.html" title="src/lmwd.c" alt="" coords="71,315,156,344"/>
+<area shape="rect" id="node13" href="$main_8c.html" title="Contains the main entry point of the program." alt="" coords="180,315,263,344"/>
 </map>

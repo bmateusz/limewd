@@ -1,4 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$lmwd_8h.html" title="Main header of the library." alt="" coords="13,83,99,112"/>
-<area shape="rect" id="node5" href="$main_8c.html" title="Contains the main entry point of the program." alt="" coords="15,160,97,189"/>
+<area shape="rect" id="node3" href="$connect_8c_source.html" title="src/connect.c" alt="" coords="5,83,107,112"/>
+<area shape="rect" id="node5" href="$lmwd_8h.html" title="Main header of the library." alt="" coords="131,83,216,112"/>
+<area shape="rect" id="node7" href="$lmwd_8c_source.html" title="src/lmwd.c" alt="" coords="76,160,161,189"/>
+<area shape="rect" id="node9" href="$main_8c.html" title="Contains the main entry point of the program." alt="" coords="185,160,268,189"/>
 </map>

@@ -75,7 +75,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="auth_8h__dep__incl.png" border="0" usemap="#src_2auth_8hdep" alt=""/></div>
 <map name="src_2auth_8hdep" id="src_2auth_8hdep">
-<area shape="rect" id="node3" href="answer_8h.html" title="Answer to connection." alt="" coords="5,83,101,112"/><area shape="rect" id="node5" href="lmwd_8h.html" title="Main header of the library." alt="" coords="11,160,96,189"/><area shape="rect" id="node7" href="main_8c.html" title="Contains the main entry point of the program." alt="" coords="12,237,95,267"/></map>
+<area shape="rect" id="node3" href="answer_8h.html" title="Answer to connection." alt="" coords="63,83,159,112"/><area shape="rect" id="node13" href="auth_8c_source.html" title="src/auth.c" alt="" coords="183,83,263,112"/><area shape="rect" id="node5" href="answer_8c_source.html" title="src/answer.c" alt="" coords="5,160,101,189"/><area shape="rect" id="node7" href="lmwd_8h.html" title="Main header of the library." alt="" coords="125,160,211,189"/><area shape="rect" id="node9" href="lmwd_8c_source.html" title="src/lmwd.c" alt="" coords="71,237,156,267"/><area shape="rect" id="node11" href="main_8c.html" title="Contains the main entry point of the program." alt="" coords="180,237,263,267"/></map>
 </div>
 </div>
 <p><a href="auth_8h_source.html">Go to the source code of this file.</a></p>
@@ -97,6 +97,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_auth</b> ()</td><
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Authentication provider. </p>
+
+<p>Definition in file <a class="el" href="auth_8h_source.html">auth.h</a>.</p>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ac323128056f8761eac25bfcea44bb464"></a><!-- doxytag: member="auth.h::construct_auth" ref="ac323128056f8761eac25bfcea44bb464" args="()" -->
 <div class="memitem">
@@ -114,6 +116,16 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>init_auth</b> ()</td><
 
 <p>Constructor of <a class="el" href="struct_auth.html" title="Struct for authentication.">Auth</a> struct. </p>
 
+<p>Definition at line <a class="el" href="auth_8c_source.html#l00003">3</a> of file <a class="el" href="auth_8c_source.html">auth.c</a>.</p>
+
+<p>References <a class="el" href="auth_8h_source.html#l00018">Auth::roles</a>, and <a class="el" href="auth_8h_source.html#l00015">Auth::user</a>.</p>
+<div class="fragment"><pre class="fragment">{
+  <span class="keyword">struct </span><a class="code" href="struct_auth.html" title="Struct for authentication.">Auth</a> *auth = malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="struct_auth.html" title="Struct for authentication.">Auth</a>));
+  auth-&gt;<a class="code" href="struct_auth.html#af4bcffb073f50538ee7ae138bef4f3bc" title="user name">user</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;
+  auth-&gt;<a class="code" href="struct_auth.html#af7e4929bc48c76163e8558555e683f73" title="roles granted">roles</a> = 0;
+  <span class="keywordflow">return</span> auth;
+}
+</pre></div>
 </div>
 </div>
 </div><!-- contents -->
