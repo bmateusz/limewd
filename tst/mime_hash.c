@@ -4,7 +4,7 @@
 #include "../src/mime.h"
 #include "../src/mime.c"
 
-int hash(const char *str, int i, int j, int k, int n)
+static int hash(const char *str, int i, int j, int k, int n)
 {
   int len = strlen(str);
   if (len == 0)
@@ -18,6 +18,27 @@ int hash(const char *str, int i, int j, int k, int n)
   }
 }
 
+static void print_result(int i, int j, int n, char *ht)
+{
+  printf("\n// Hash(x) = (x[0] & %d + x[1] & %d + len) mod %d\n", i, j, n);
+  printf("static const char *mime_str[] =\n"
+         "{\n");
+  for (int s = 0; s < n; ++s)
+  {
+    printf("  \"%s\", \"%s\",\n", mime_str[(ht[s] - 1) * 2], mime_str[(ht[s] - 1) * 2 + 1]);
+  }
+  printf("};\n"
+         "\n"
+         "static const int n_mime_str = %d;\n\n", n);
+  printf("static int hash_mime(const char *str)\n"
+         "{\n"
+         "  int len = strlen(str);\n"
+         "  if (len) return ((str[0] & %d) + (str[1] & %d) + len) %% %d;\n"
+         "  else return 0;\n"
+         "}\n"
+         "", i, j, n);
+}
+
 int main()
 {
   for (int i = 0; i < n_mime_str * 2; i += 2)
@@ -28,7 +49,7 @@ int main()
   int n = n_mime_str;
   char ht[n];
   char verbose = 0;
-  int iterations = 512;
+  int iterations = 256;
   int maxs = 0;
   
   for (int i = 0; i < iterations; ++i)
@@ -60,23 +81,7 @@ int main()
 
       if (found)
       {
-        printf("\n// Hash(x) = (x[0] & %d + x[1] & %d + len) mod %d\n", i, j, n);
-        printf("static const char *mime_str[] =\n"
-               "{\n");
-        for (int s = 0; s < n; ++s)
-        {
-          printf("  \"%s\", \"%s\",\n", mime_str[(ht[s] - 1) * 2], mime_str[(ht[s] - 1) * 2 + 1]);
-        }
-        printf("};\n"
-               "\n"
-               "static const int n_mime_str = %d;\n\n", n);
-        printf("static int hash_mime(const char *str)\n"
-               "{\n"
-               "  int len = strlen(str);\n"
-               "  if (len) return ((str[0] & %d) + (str[1] & %d) + len) %% %d;\n"
-               "  else return 0;\n"
-               "}\n"
-               "", i, j, n);
+        print_result(i, j, n, ht);
         exit(0);
       }
     }
