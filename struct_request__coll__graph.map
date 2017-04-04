@@ -1,4 +1,4 @@
 <map id="G" name="G">
 <area shape="rect" id="node2" href="$struct_session.html" title="Session" alt="" coords="5,5,75,35"/>
-<area shape="rect" id="node4" href="$struct_url.html" title="Url" alt="" coords="101,5,139,35"/>
+<area shape="rect" id="node4" href="$struct_url.html" title="Struct for storing parsed URL." alt="" coords="101,5,139,35"/>
 </map>
