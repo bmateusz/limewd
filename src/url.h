@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Struct for storing parsed URL.
+ */
 struct Url
 {
   const char *url;

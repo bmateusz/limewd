@@ -68,7 +68,7 @@ libs()
     if [ -n $INSTALL_LIB_PATH ]
     then
       # Duktape lacks configure script, so set the install dir if needed
-      sed -i "s:INSTALL_PREFIX=.*:INSTALL_PREFIX=$INSTALL_LIB_PATH:g" Makefile.sharedlibrary
+      sed -i"" "s:INSTALL_PREFIX=.*:INSTALL_PREFIX=$INSTALL_LIB_PATH:g" Makefile.sharedlibrary
     fi
     make -f Makefile.sharedlibrary
     cd ..
