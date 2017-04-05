@@ -26,7 +26,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 	@$(CC) -MM -MF $(@:.o=.d) -MT $@ $(CFLAGS) $<
 
-.PHONY: clean tag doc
+.PHONY: clean tag doc tidy
 clean:
 	$(RM) $(OBJECTS) $(DEPENDENCIES) $(EXECUTABLE)
 
@@ -36,3 +36,6 @@ tag:
 
 doc:
 	doxygen
+
+tidy:
+	clang-tidy $(SOURCES)

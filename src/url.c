@@ -12,9 +12,10 @@ struct Url *construct_url(const char *url_str)
     len = strlen(index_path);
     url_str = index_path;
   }
-  char *path = malloc(len + strlen(www) + 1);
-  strcpy(path, www);
-  url->path = strcat(path, url_str);
+  len += strlen(www);
+  char *path = malloc(len + 1);
+  strncpy(path, www, len);
+  url->path = strncat(path, url_str, len - strlen(path));
 
   const char *ext = strrchr(url_str, '.');
   if (ext == NULL)

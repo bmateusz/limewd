@@ -33,7 +33,7 @@ int auth_iterator(void *cls,
 
   if (strcmp(key, "user") == 0)
   {
-    strcpy(auth->user, data);
+    strncpy(auth->user, data, 128);
   }
 
   if (strcmp(key, "password") == 0)
