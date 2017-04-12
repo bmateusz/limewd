@@ -100,10 +100,10 @@ install()
   make install
   cd ..
 
-  echo "Install duktape"
-  cd duktape
-  make -f Makefile.sharedlibrary install
-  cd ..
+#echo "Install duktape"
+#cd duktape
+#make -f Makefile.sharedlibrary install
+#cd ..
 
   echo "Run ldconfig if needed"
   if [ -n $INSTALL_LIB_PATH ]
