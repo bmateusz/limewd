@@ -5,10 +5,10 @@ set -e
 BASEDIR=$(dirname "$0")
 LIB_SRC_DIR=external
 LIB_BIN_DIR=compiled
-LIBMICROHTTPD=libmicrohttpd-0.9.52
+LIBMICROHTTPD=libmicrohttpd-0.9.53
 SQLITE_YEAR=2017
 SQLITE=sqlite-autoconf-3160000
-DUKTAPE=duktape-2.0.1
+DUKTAPE=duktape-2.0.2
 
 cd $BASEDIR
 
@@ -64,14 +64,14 @@ libs()
     wget http://duktape.org/$DUKTAPE.tar.xz
     tar xf $DUKTAPE.tar.xz
     mv $DUKTAPE duktape
-    cd duktape
-    if [ -n $INSTALL_LIB_PATH ]
-    then
+#cd duktape
+#if [ -n $INSTALL_LIB_PATH ]
+#then
       # Duktape lacks configure script, so set the install dir if needed
-      sed -i"" "s:INSTALL_PREFIX=.*:INSTALL_PREFIX=$INSTALL_LIB_PATH:g" Makefile.sharedlibrary
-    fi
-    make -f Makefile.sharedlibrary
-    cd ..
+#sed -i"" "s:INSTALL_PREFIX=.*:INSTALL_PREFIX=$INSTALL_LIB_PATH:g" Makefile.sharedlibrary
+#fi
+#make -f Makefile.sharedlibrary
+#cd ..
   fi
 
   cd ..

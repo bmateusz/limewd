@@ -2,6 +2,7 @@ external
 compiled
 tags
 lmwd
-src/.*
 docs
 db
+**.o
+**.d

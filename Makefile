@@ -9,9 +9,9 @@ CFLAGS=-c -g -Wall -Wextra -std=c99
 ADDLDFLAGS=-fsanitize=address,leak,undefined
 endif
 
-LDFLAGS=-lmicrohttpd -lsqlite3 -lduktape -lm $(ADDLDFLAGS)
-SOURCES=$(wildcard src/*.c)
-OBJECTS=$(SOURCES:src/%.c=src/.%.o)
+LDFLAGS=-lmicrohttpd -lsqlite3 -lm $(ADDLDFLAGS)
+SOURCES=$(wildcard src/*.c) external/duktape/src/duktape.c
+OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 DEPENDENCIES=$(OBJECTS:.o=.d)
 EXECUTABLE=lmwd
 
@@ -22,15 +22,15 @@ $(EXECUTABLE): $(OBJECTS)
 
 -include $(DEPENDENCIES)
 
-.%.o: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) $< -o $@
 	@$(CC) -MM -MF $(@:.o=.d) -MT $@ $(CFLAGS) $<
 
-.PHONY: clean tag doc tidy
+.PHONY: clean tags doc tidy
 clean:
 	$(RM) $(OBJECTS) $(DEPENDENCIES) $(EXECUTABLE)
 
-tag:
+tags:
 	$(RM) tags
 	ctags -R -h ".c.h"
 
