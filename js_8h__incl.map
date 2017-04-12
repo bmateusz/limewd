@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$mhd_8h.html" title="Includes libmicrohttpd library." alt="" coords="383,160,441,189"/>
-<area shape="rect" id="node19" href="$duktape_8h.html" title="Includes duktape library." alt="" coords="607,83,684,112"/>
-<area shape="rect" id="node22" href="$common_8h.html" title="Common responses." alt="" coords="449,83,532,112"/>
-<area shape="rect" id="node25" href="$url_8h_source.html" title="url.h" alt="" coords="561,160,607,189"/>
+<area shape="rect" id="node3" href="$mhd_8h.html" title="Includes libmicrohttpd library." alt="" coords="391,160,449,189"/>
+<area shape="rect" id="node19" href="$duktape_8h.html" title="Includes duktape library." alt="" coords="653,83,731,112"/>
+<area shape="rect" id="node23" href="$common_8h.html" title="Common responses." alt="" coords="457,83,540,112"/>
+<area shape="rect" id="node26" href="$url_8h_source.html" title="url.h" alt="" coords="555,160,600,189"/>
 </map>

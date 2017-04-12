@@ -1,16 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$lmwd_8h.html" title="Main header of the library." alt="" coords="695,83,759,112"/>
-<area shape="rect" id="node7" href="$mhd_8h.html" title="Includes libmicrohttpd library." alt="" coords="714,392,773,421"/>
-<area shape="rect" id="node23" href="$duktape_8h.html" title="Includes duktape library." alt="" coords="506,315,583,344"/>
-<area shape="rect" id="node26" href="$sqlite_8h.html" title="Includes sqlite library." alt="" coords="983,315,1047,344"/>
-<area shape="rect" id="node30" href="$answer_8h.html" title="Answer to connection." alt="" coords="447,160,522,189"/>
-<area shape="rect" id="node68" href="$connect_8h.html" title="Connection handler." alt="" coords="933,237,1010,267"/>
-<area shape="rect" id="node33" href="$common_8h.html" title="Common responses." alt="" coords="298,315,381,344"/>
-<area shape="rect" id="node36" href="$session_8h.html" title="Session handling." alt="" coords="647,237,725,267"/>
-<area shape="rect" id="node39" href="$url_8h_source.html" title="url.h" alt="" coords="395,392,441,421"/>
-<area shape="rect" id="node44" href="$static_8h.html" title="Answer static response." alt="" coords="202,237,266,267"/>
-<area shape="rect" id="node54" href="$js_8h.html" title="Answer with server&#45;side JavaScript." alt="" coords="447,237,490,267"/>
-<area shape="rect" id="node60" href="$request_8h.html" title="Request handling structure." alt="" coords="631,315,706,344"/>
-<area shape="rect" id="node64" href="$auth_8h.html" title="Authentication provider." alt="" coords="799,237,858,267"/>
-<area shape="rect" id="node47" href="$mime_8h.html" title="Mime type handling." alt="" coords="23,315,87,344"/>
+<area shape="rect" id="node3" href="$lmwd_8h.html" title="Main header of the library." alt="" coords="187,83,251,112"/>
+<area shape="rect" id="node7" href="$mhd_8h.html" title="Includes libmicrohttpd library." alt="" coords="505,392,564,421"/>
+<area shape="rect" id="node23" href="$duktape_8h.html" title="Includes duktape library." alt="" coords="240,315,317,344"/>
+<area shape="rect" id="node27" href="$sqlite_8h.html" title="Includes sqlite library." alt="" coords="51,315,115,344"/>
+<area shape="rect" id="node31" href="$answer_8h.html" title="Answer to connection." alt="" coords="497,160,572,189"/>
+<area shape="rect" id="node69" href="$connect_8h.html" title="Connection handler." alt="" coords="932,237,1009,267"/>
+<area shape="rect" id="node34" href="$common_8h.html" title="Common responses." alt="" coords="493,315,576,344"/>
+<area shape="rect" id="node37" href="$session_8h.html" title="Session handling." alt="" coords="328,237,405,267"/>
+<area shape="rect" id="node40" href="$url_8h_source.html" title="url.h" alt="" coords="897,392,943,421"/>
+<area shape="rect" id="node45" href="$static_8h.html" title="Answer static response." alt="" coords="608,237,672,267"/>
+<area shape="rect" id="node55" href="$js_8h.html" title="Answer with server&#45;side JavaScript." alt="" coords="435,237,477,267"/>
+<area shape="rect" id="node61" href="$request_8h.html" title="Request handling structure." alt="" coords="976,315,1051,344"/>
+<area shape="rect" id="node65" href="$auth_8h.html" title="Authentication provider." alt="" coords="189,237,248,267"/>
+<area shape="rect" id="node48" href="$mime_8h.html" title="Mime type handling." alt="" coords="888,315,952,344"/>
 </map>
